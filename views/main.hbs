@@ -1,0 +1,131 @@
+<div id="main">
+  <div id="game" class="container-fluid">
+    <div class="row">
+      <div id="left-section" class="col-4 d-flex align-items-center justify-content-center">
+        <div id="img-area">
+          <img class="img-fluid" id="hallo2Img" src="/imgs/hallo2.jpg">
+        </div>
+      </div>
+      <div id="middle-section" class="col-4 d-flex flex-column align-items-center justify-content-center">
+        <div class="row">
+          <div class="col-12 mt-4 mb-3 align-items-center justify-content-center">
+            <div class="text-center p-2" id="gameSetupArea">
+              <h3 id="gameOptionsTitle" class="mb-4">Set Game Options</h3>
+              <form method="post" action="/hangman/start">
+                <div class="d-flex justify-content-center align-items-center mb-3">
+                  <label id="selectDifficulty" for="difficulty" class="form-label me-2">Select Difficulty:</label>
+                  <select id="difficulty" name="difficulty" class="form-select">
+                    <option value="0">Easy</option>
+                    <option value="1">Medium</option>
+                    <option value="2">Hard</option>
+                  </select>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn">Start New Game</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-12 mb-4 align-items-center justify-content-center">
+            <div class="p-2" id="gameStatsArea">
+              <h4 class="text-center mb-3" id="gameStatsTitle">Game Stats</h4>
+              <table id="gameStatsTable" class="table table-striped">
+                <tbody>
+                <tr class="row-a">
+                  <td>Right</td>
+                  <td>{{game.rightGuesses}}</td>
+                </tr>
+                <tr class="row-b">
+                  <td>Wrong</td>
+                  <td>{{game.wrongGuesses}}</td>
+                </tr>
+                <tr class="row-a">
+                  <td>Total</td>
+                  <td>{{game.attempts}}</td>
+                </tr>
+                <tr class="row-b">
+                  <td>Need</td>
+                  <td>{{game.uniqueLetters}}</td>
+                </tr>
+                <tr class="row-a">
+                  <td>Chances</td>
+                  <td>{{game.attemptsLeft}}</td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-grid text-center" id="hintButtonArea">
+                <button id="hintButton" type="button" class="btn" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="{{game.hint}}">Need a hint?</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div id="right-section" class="col-4 d-flex flex-column align-items-center justify-content-center">
+        <div class="row">
+          {{#if game.gameOn}}
+            <div class="col-12 mt-4 align-items-center justify-content-center">
+              <div class="text-center p-2" id="letterSelectionArea">
+                <form method="post" action="/hangman/guess">
+                  <div class="d-flex justify-content-center align-items-center mb-3">
+                    <label for="guess" class="form-label me-2">Select Letter:</label>
+                    <select id="guess" name="guess" class="form-select">
+                      {{#each game.letterBank}}
+                        <option value="{{this}}">{{this}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="d-grid text-center">
+                    <button type="submit" class="btn">Guess</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+          <div class="col-12 mt-3 mb-3 align-items-center justify-content-center">
+            <div class="text-center p-2" id="gameArea">
+              <h2 id="word">
+                {{#if game.hasLost}}
+                  {{game.secretWord}}
+                {{else}}
+                  {{game.hiddenWord}}
+                {{/if}}
+              </h2>
+              <img id="hangmanImg" src="/imgs/{{game.imgNum}}.png">
+              {{#if game.hasWon}}
+                <h4 class="mt-3">You Win!</h4>
+                <img class="img-fluid mt-1" id="winImg" src="/imgs/gameOverWin.webp">
+              {{/if}}
+              {{#if game.hasLost}}
+                <h4 class="mt-3">You Lose.</h4>
+                <img class="img-fluid mt-1" id="lossImg" src="/imgs/gameOver.png">
+              {{/if}}
+            </div>
+          </div>
+          <div class="col-12 mb-4 align-items-center justify-content-center">
+            <div class="text-center p-2" id="letterBankArea">
+              <div class="row">
+                <div class="col-6">
+                  Wrong Guesses:
+                </div>
+                <div class="col-6">
+                  Right Guesses:
+                </div>
+                <div class="col-6">
+                  {{#each game.wrongGuessHistory}}
+                    <span id="letter">{{this}}</span>
+                  {{/each}}
+                </div>
+                <div class="col-6">
+                  {{#each game.rightGuessHistory}}
+                    <span id="letter">{{this}}</span>
+                  {{/each}}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+body {
+    background-color: black;
+}
+header {
+    background-color: black;
+    height: 10vh;
+    min-height: 66px;
+    display: flex;
+    align-items: center;
+}
+#logo {
+    height: 56px;
+    border-radius: 4px;
+}
+#title {
+    color: orange;
+    margin-left: 10px;
+    font-size: 30px;
+}
+#game {
+    width: 96vw;
+}
+#left-section {
+    background-color: #395e7e;
+}
+#hallo2Img, #hangmanImg {
+    border: 2px solid black;
+    border-radius: 10px;
+}
+#middle-section {
+    background-color: #4b108a;
+}
+.btn {
+    background-color: orange;
+    border: 2px rebeccapurple solid;
+}
+.btn:hover, .btn:active {
+    background-color: #ffad1a;
+    border: 2px rebeccapurple solid;
+}
+.row-a {
+    background-color: #84ee84 !important;
+}
+.row-b {
+    background-color: #9fe79f !important;
+}
+#gameSetupArea, #gameStatsArea, #letterSelectionArea, #gameArea, #letterBankArea {
+    background-color: #ad97da;
+    border: 2px black solid;
+    border-radius: 4px;
+}
+#difficulty, #guess {
+    width: auto;
+}
+#right-section {
+    background-color: orange;
+}
+#word {
+    letter-spacing: 2px;
+}
+#copyright {
+    color: orange;
+}
